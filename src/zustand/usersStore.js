@@ -1,6 +1,6 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-const useUserStore = create(set => ({
+const useUserStore = create((set) => ({
   data: [],
   dataLogin: {},
   isLoading: false,
@@ -9,13 +9,13 @@ const useUserStore = create(set => ({
   row: 10,
   countPage: 1,
   page: 1,
-  setPage: page => {
+  setPage: (page) => {
     set({
       page: page,
     });
   },
-  setCountPage: count => {
-    set(state => ({
+  setCountPage: (count) => {
+    set((state) => ({
       row: count,
       countPage: Math.ceil(state.data.length / count),
     }));
@@ -25,7 +25,9 @@ const useUserStore = create(set => ({
       set({
         isLoading: true,
       });
-      const response = await fetch(process.env.REACT_APP_API_HOST + '/api/users/all');
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/all`
+      );
       const responseJson = await response.json();
       setTimeout(() => {
         set({
@@ -40,12 +42,14 @@ const useUserStore = create(set => ({
       });
     }
   },
-  filterData: async keyword => {
+  filterData: async (keyword) => {
     try {
       set({
         isLoading: true,
       });
-      const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/${keyword}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/${keyword}`
+      );
       const json = await response.json();
       setTimeout(() => {
         set({
@@ -60,12 +64,14 @@ const useUserStore = create(set => ({
       });
     }
   },
-  userinfoById: async id => {
+  userinfoById: async (id) => {
     try {
       set({
         isLoading: true,
       });
-      const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/userinfo/${id}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/userinfo/${id}`
+      );
       const json = await response.json();
       setTimeout(() => {
         set({
@@ -85,8 +91,10 @@ const useUserStore = create(set => ({
       set({
         isLoading: true,
       });
-      const user = JSON.parse(localStorage.getItem('user'));
-      const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/userinfo/${user.data.user_id}`);
+      const user = JSON.parse(localStorage.getItem("user"));
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/userinfo/${user.data.user_id}`
+      );
       const json = await response.json();
       setTimeout(() => {
         set({
@@ -101,17 +109,20 @@ const useUserStore = create(set => ({
       });
     }
   },
-  updateUser: async formData => {
+  updateUser: async (formData) => {
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem("user"));
       set({
         isLoading: true,
       });
 
-      const edit = await fetch(process.env.REACT_APP_API_HOST + '/api/users/' + user.data.user_id, {
-        method: 'PUT',
-        body: formData,
-      });
+      const edit = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/${user.data.user_id}`,
+        {
+          method: "PUT",
+          body: formData,
+        }
+      );
 
       const editJson = await edit.json();
 
@@ -119,14 +130,16 @@ const useUserStore = create(set => ({
         throw new Error(editJson.error);
       }
 
-      const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/userinfo/${user.data.user_id}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_API_HOST}/api/users/userinfo/${user.data.user_id}`
+      );
       const json = await response.json();
 
       user.data.profile_picture = json.data.Profile.profile_picture;
       user.data.email = json.data.email;
       user.data.name = json.data.name;
 
-      localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem("user", JSON.stringify(user));
 
       setTimeout(() => {
         set({
@@ -142,14 +155,17 @@ const useUserStore = create(set => ({
       });
     }
   },
-  handleDelete: async id => {
+  handleDelete: async (id) => {
     set({
       isLoading: true,
     });
-    const user = JSON.parse(localStorage.getItem('user'));
-    await fetch(process.env.REACT_APP_API_HOST + '/api/questions/delete/' + id);
+    const user = JSON.parse(localStorage.getItem("user"));
+    await fetch(process.env.REACT_APP_API_HOST + "/api/questions/delete/" + id);
 
-    const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/userinfo/${user.data.user_id}`);
+    const response = await fetch(
+      process.env.REACT_APP_API_HOST +
+        `/api/users/userinfo/${user.data.user_id}`
+    );
     const json = await response.json();
 
     setTimeout(() => {
@@ -161,20 +177,26 @@ const useUserStore = create(set => ({
     }, 500);
   },
 
-  handleDeleteAnswer: async id => {
+  handleDeleteAnswer: async (id) => {
     try {
       set({
         isLoading: true,
       });
-      const user = JSON.parse(localStorage.getItem('user'));
-      await fetch(process.env.REACT_APP_API_HOST + '/api/questions/answer/' + id, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${user.data.token}`,
-        },
-      });
+      const user = JSON.parse(localStorage.getItem("user"));
+      await fetch(
+        process.env.REACT_APP_API_HOST + "/api/questions/answer/" + id,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user.data.token}`,
+          },
+        }
+      );
 
-      const response = await fetch(process.env.REACT_APP_API_HOST + `/api/users/userinfo/${user.data.user_id}`);
+      const response = await fetch(
+        process.env.REACT_APP_API_HOST +
+          `/api/users/userinfo/${user.data.user_id}`
+      );
       const json = await response.json();
 
       setTimeout(() => {

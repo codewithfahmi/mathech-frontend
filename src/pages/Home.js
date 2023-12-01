@@ -60,14 +60,14 @@ const Home = () => {
             }}
             onChange={handleChange}
           >
-            <option value='5'>5</option>
-            <option value='10' selected>
+            <option defaultValue='5'>5</option>
+            <option defaultValue='10' selected>
               10
             </option>
-            <option value='20'>20</option>
-            <option value='30'>30</option>
-            <option value='40'>40</option>
-            <option value='50'>50</option>
+            <option defaultValue='20'>20</option>
+            <option defaultValue='30'>30</option>
+            <option defaultValue='40'>40</option>
+            <option defaultValue='50'>50</option>
           </select>
         </div>
         <div className='btn-group align-items-center' role='group'>
