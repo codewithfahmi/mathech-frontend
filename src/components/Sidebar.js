@@ -14,7 +14,7 @@ const Sidebar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/tag/populer');
+        const response = await fetch(`${process.env.REACT_APP_API_HOST}+/api/tag/populer`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

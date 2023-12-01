@@ -17,7 +17,7 @@ const DetailAnswer = ({ answer, id, state }) => {
                 borderRadius: '50%',
                 objectFit: 'cover',
               }}
-              src={answer.User.Profile.profile_picture === null ? 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png' : 'http://localhost:3000/' + answer.User.Profile.profile_picture}
+              src={answer.User.Profile.profile_picture === null ? 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png' : `${process.env.REACT_APP_API_HOST}/` + answer.User.Profile.profile_picture}
               alt=''
             />
             <div

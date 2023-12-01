@@ -39,7 +39,7 @@ const useTagStore = create(set => ({
     set({
       isLoading: true,
     });
-    const response = await fetch(`http://localhost:3000/api/home/${keyword}`);
+    const response = await fetch(`${process.env.REACT_APP_API_HOST}+/api/home/${keyword}`);
     const json = await response.json();
 
     setTimeout(() => {

@@ -135,7 +135,7 @@ const UserInfo = () => {
               <img
                 src={
                   userinfo.Profile && userinfo.Profile.profile_picture
-                    ? 'http://localhost:3000/' +
+                    ? `${process.env.REACT_APP_API_HOST}/` +
                       userinfo.Profile.profile_picture
                     : 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png'
                 }
@@ -459,7 +459,7 @@ const UserInfo = () => {
                             <img
                               src={
                                 item.Profile && item.Profile.profile_picture
-                                  ? 'http://localhost:3000/' +
+                                  ? `${process.env.REACT_APP_API_HOST}/` +
                                     item.Profile.profile_picture
                                   : 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png'
                               }

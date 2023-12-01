@@ -124,7 +124,7 @@ const Navbar = () => {
               className='profile'
               src={
                 dataLogin.profile_picture && dataLogin.profile_picture
-                  ? 'http://localhost:3000/' + dataLogin.profile_picture
+                  ? `${process.env.REACT_APP_API_HOST}/` + dataLogin.profile_picture
                   : 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png'
               }
               alt=''

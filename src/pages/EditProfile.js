@@ -422,7 +422,7 @@ export default function EditProfile() {
                           }}
                         >
                           <img
-                            src={item.Profile && item.Profile.profile_picture ? 'http://localhost:3000/' + item.Profile.profile_picture : 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png'}
+                            src={item.Profile && item.Profile.profile_picture ?`${process.env.REACT_APP_API_HOST}/` + item.Profile.profile_picture : 'https://atmos.ucla.edu/wp-content/themes/aos-child-theme/images/generic-avatar.png'}
                             style={{
                               width: '50px',
                               height: '50px',
